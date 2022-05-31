@@ -40,6 +40,17 @@ contract WavePortal {
 
     }
 
+    function vote(address _address) public {
+        console.log("%s is voting for %s", msg.sender, _address);
+        uint256 prizeAmount = 0.0001 ether;
+        require(
+            prizeAmount <= address(this).balance,
+            "Trying to withdraw more money than the contract has."
+        );
+        (bool success, ) = _address.call{value: prizeAmount}("");
+        require(success, "Failed to withdraw money from contract");
+    }
+
     function getAllWaves() public view returns (Wave[] memory) {
         return waves;
     }

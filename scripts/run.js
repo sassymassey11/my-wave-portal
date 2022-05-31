@@ -25,6 +25,11 @@ const main = async () => {
   await waveTxn.wait();
 
   /*
+  * Send Vote
+  */
+ let voteTxn = await waveContract.vote(randomPerson.address);
+ await voteTxn.wait();
+  /*
    * Get Contract balance to see what happened!
    */
   contractBalance = await hre.ethers.provider.getBalance(waveContract.address);
